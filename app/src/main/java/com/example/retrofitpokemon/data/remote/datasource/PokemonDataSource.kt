@@ -39,30 +39,38 @@ class PokemonDataSource @Inject constructor(
         }
     }
 
-    suspend fun deletePokemon(id: Int): NetworkResult<Boolean> = withContext(Dispatchers.IO) {
+    suspend fun deletePokemon(id: Int): NetworkResult<Boolean> = withContext(dispatcher) {
         safeApiCallNoBody { pokemonService.deletePokemon(id) }
     }
 
-    suspend fun fetchAllPokemons(): NetworkResult<List<Pokemon>> = withContext(dispatcher) {
-        safeApiCall { pokemonService.getEnlaces() }
-            .flatMap { result ->
-                val enlaces = result.flatMap { it.pokemonEnlaces.map { pe -> pe.url } }
+    suspend fun fetchAllPokemons(): NetworkResult<List<Pokemon>> = withContext(Dispatchers.IO) {
+        val resultadoEnlaces = safeApiCall { pokemonService.getPokemons() }
 
-                coroutineScope {
-                    val pokemons = enlaces.mapNotNull { enlace ->
-                        async {
-                            val id = enlace.trimEnd('/').substringAfterLast('/').toIntOrNull() ?: return@async null
-                            when (val r = safeApiCall { pokemonService.getPokemonById(id) }) {
-                                is NetworkResult.Success -> r.data?.let { PokemonMapper.pokemonDatabaseToPokemon(it) }
-                                else -> null
+        when (resultadoEnlaces) {
+            is NetworkResult.Success -> {
+                val urls = resultadoEnlaces.data.results.map { it.url }
+
+                try {
+                    val listaPokemons = coroutineScope {
+                        urls.map { url ->
+                            async {
+                                val id = url.trimEnd('/').substringAfterLast('/').toIntOrNull()
+                                if (id != null) {
+                                    when (val respuestaPokemon = safeApiCall { pokemonService.getPokemonById(id) }) {
+                                        is NetworkResult.Success -> {
+                                            respuestaPokemon.data?.let { PokemonMapper.pokemonDatabaseToPokemon(it) }
+                                        }
+                                        else -> null // Podés registrar el error si querés
+                                    }
+                                } else null
                             }
-                        }
-                    }.awaitAll().filterNotNull()
+                        }.awaitAll().filterNotNull()
+                    }
 
-                    NetworkResult.Success(pokemons)
-                }
-            }
-    }
+                    NetworkResult.Success(listaPokemons)
+                } catch (e: Exception) {
+
+
 
 
 

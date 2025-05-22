@@ -11,7 +11,8 @@ import retrofit2.http.Url
 
 interface PokemonService {
     @GET("pokemon")
-    suspend fun getPokemons(): Response<List<PokemonDatabase>>
+    suspend fun getPokemons(@Query("url") url: String? = null): Response<PokemonEnlaceResponse>
+
 
     @GET("pokemon")
     suspend fun getEnlaces(): Response<List<PokemonEnlaceResponse>>
