@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/labelFoto"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/fotoDetallePokemon"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
         app:layout_constraintBottom_toTopOf="@+id/textViewNombre"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,34 +17,54 @@
         android:id="@+id/textViewNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50sp"
         android:text="@string/nombre"
-        app:layout_constraintBottom_toTopOf="@+id/textViewTipos"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/labelTipos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelFoto" />
+        app:layout_constraintTop_toBottomOf="@+id/fotoDetallePokemon" />
+
+    <TextView
+        android:id="@+id/labelTipos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tipos"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@id/textViewTipos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
 
     <TextView
         android:id="@+id/textViewTipos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:text="@string/tipos"
+        app:layout_constraintBottom_toTopOf="@id/labelHabilidades"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelTipos" />
+
+
+    <TextView
+        android:id="@+id/labelHabilidades"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/habilidades"
+        android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textViewHabilidades"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombre" />
+        app:layout_constraintTop_toBottomOf="@id/textViewTipos" />
 
     <TextView
         android:id="@+id/textViewHabilidades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:text="@string/habilidades"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTipos" />
-
+        app:layout_constraintTop_toBottomOf="@+id/labelHabilidades" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

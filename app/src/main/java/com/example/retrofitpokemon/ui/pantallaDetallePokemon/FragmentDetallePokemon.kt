@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import coil.load
 import com.example.retrofitpokemon.databinding.FragmentDetallePokemonBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -40,9 +41,10 @@ class FragmentDetallePokemon : Fragment(){
     private fun observarState() {
         viewModel.uiState.observe(viewLifecycleOwner) { state ->
             state.pokemon?.let {
-                binding.textViewNombre.setText(state.pokemon.nombre)
-                binding.textViewTipos.setText(state.pokemon.tipos.toString())
-
+                binding.textViewNombre.text = state.pokemon.nombre
+                binding.textViewTipos.text = state.pokemon.tipos.toString()
+                binding.textViewHabilidades.text = state.pokemon.habilidades.toString()
+                binding.fotoDetallePokemon.load(state.pokemon.urlFoto)
             }
         }
     }

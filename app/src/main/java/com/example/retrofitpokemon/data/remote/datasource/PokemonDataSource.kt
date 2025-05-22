@@ -18,10 +18,6 @@ class PokemonDataSource @Inject constructor(
 ) : BaseApiResponse() {
 
     suspend fun fetchPokemonById(id: Int): NetworkResult<Pokemon> {
-        //Le estoy pasando un objeto Pokemon, no PokemonDatabase. En ningun momento creo ningun objeto PokemonDatabase
-        return NetworkResult.Success(data = Pokemon(1, "caca", listOf("pelele", "mierda"), listOf("hijo de puta", "cabron"), "url"))
-        /*
-
         val call = safeApiCall {
             pokemonService.getPokemonById(id)
         }
@@ -36,7 +32,6 @@ class PokemonDataSource @Inject constructor(
                 }
             }
         }
-         */
     }
 
     suspend fun deletePokemon(id: Int): NetworkResult<Boolean> = withContext(Dispatchers.IO) {

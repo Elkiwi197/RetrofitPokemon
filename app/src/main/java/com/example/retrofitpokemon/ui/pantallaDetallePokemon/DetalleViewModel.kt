@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.retrofitpokemon.common.ConstantesErrores
 import com.example.retrofitpokemon.data.remote.NetworkResult
 import com.example.retrofitpokemon.data.remote.mappers.PokemonMapper
+import com.example.retrofitpokemon.domain.model.Pokemon
 import com.example.retrofitpokemon.domain.usecases.GetPokemonByIdUseCase
 import com.example.retrofitpokemon.ui.common.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
