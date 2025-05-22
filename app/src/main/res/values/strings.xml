@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RetrofitPokemon</string>
+    <string name="habilidades">Habilidades:</string>
+    <string name="tipos">Tipos:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="pokemons">Pokemons</string>
+    <string name="tipos_menu">Tipos</string>
+    <string name="localizaciones_menu">Localizaciones</string>
+</resources>

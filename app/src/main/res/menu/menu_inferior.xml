@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/fragmentListaPokemon"
+        android:title="@string/pokemons"
+        android:icon="@drawable/baseline_catching_pokemon_24"/>
+    <item android:id="@+id/fragmentListaTipos"
+        android:title="@string/tipos_menu"
+        android:icon="@drawable/baseline_bubble_chart_24"/>
+    <item android:id="@+id/fragmentListaLocalizaciones"
+        android:title="@string/localizaciones_menu"
+        android:icon="@drawable/baseline_location_pin_24"/>
+</menu>

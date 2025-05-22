@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentDetallePokemon">
+    <fragment
+        android:id="@+id/fragmentListaPokemon"
+        android:name="com.example.retrofitpokemon.ui.pantallaListaPokemon.FragmentListaPokemon"
+        android:label="fragment_lista_pokemon"
+        tools:layout="@layout/fragment_lista_pokemon">
+        <action
+            android:id="@+id/action_fragmentListaPokemon_to_fragmentDetallePokemon"
+            app:destination="@id/fragmentDetallePokemon">
+            <argument
+                android:name="idPokemon"
+                app:argType="integer" />
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetallePokemon"
+        android:name="com.example.retrofitpokemon.ui.pantallaDetallePokemon.FragmentDetallePokemon"
+        android:label="fragment_detalle_pokemon"
+        tools:layout="@layout/fragment_detalle_pokemon" />
+    <fragment
+        android:id="@+id/fragmentListaTipos"
+        android:name="com.example.retrofitpokemon.ui.pantallaListaTipos.FragmentListaTipos"
+        android:label="fragment_lista_tipos"
+        tools:layout="@layout/fragment_lista_tipos" />
+    <fragment
+        android:id="@+id/fragmentListaLocalizaciones"
+        android:name="com.example.retrofitpokemon.ui.pantallaListaLocalizaciones.FragmentListaLocalizaciones"
+        android:label="fragment_lista_localizaciones"
+        tools:layout="@layout/fragment_lista_localizaciones" />
+
+</navigation>
