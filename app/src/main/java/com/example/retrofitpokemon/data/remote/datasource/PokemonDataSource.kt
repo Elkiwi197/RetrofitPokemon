@@ -39,70 +39,41 @@ class PokemonDataSource @Inject constructor(
         }
     }
 
+    suspend fun fetchAllPokemons(): NetworkResult<List<Pokemon>> {
+        // Realizar la llamada para obtener el listado de Pokémon
+        val response = safeApiCall { pokemonService.getPokemons() }
+
+        return when (response) {
+            is NetworkResult.Success -> {
+                // Extraer las URLs de los Pokémon
+                val urls = response.data?.results?.map { it.url } ?: emptyList()
+
+                // Obtener los detalles de cada Pokémon
+                val pokemons = urls.mapNotNull { url ->
+                    val id = url.trimEnd('/').substringAfterLast('/').toIntOrNull()
+                    if (id != null) {
+                        val pokemonResponse = safeApiCall { pokemonService.getPokemonById(id) }
+                        when (pokemonResponse) {
+                            is NetworkResult.Success -> {
+                                // Mapear la respuesta a un objeto Pokemon
+                                PokemonMapper.pokemonDatabaseToPokemon(pokemonResponse.data!!)
+                            }
+                            else -> null
+                        }
+                    } else null
+                }
+
+                // Devolver el resultado
+                NetworkResult.Success(pokemons)
+            }
+            is NetworkResult.Error -> NetworkResult.Error(message = response.message)
+            is NetworkResult.Loading -> NetworkResult.Loading()
+        }
+    }
+
+
     suspend fun deletePokemon(id: Int): NetworkResult<Boolean> = withContext(dispatcher) {
         safeApiCallNoBody { pokemonService.deletePokemon(id) }
     }
-
-    suspend fun fetchAllPokemons(): NetworkResult<List<Pokemon>> = withContext(Dispatchers.IO) {
-        val resultadoEnlaces = safeApiCall { pokemonService.getPokemons() }
-
-        when (resultadoEnlaces) {
-            is NetworkResult.Success -> {
-                val urls = resultadoEnlaces.data.results.map { it.url }
-
-                try {
-                    val listaPokemons = coroutineScope {
-                        urls.map { url ->
-                            async {
-                                val id = url.trimEnd('/').substringAfterLast('/').toIntOrNull()
-                                if (id != null) {
-                                    when (val respuestaPokemon = safeApiCall { pokemonService.getPokemonById(id) }) {
-                                        is NetworkResult.Success -> {
-                                            respuestaPokemon.data?.let { PokemonMapper.pokemonDatabaseToPokemon(it) }
-                                        }
-                                        else -> null // Podés registrar el error si querés
-                                    }
-                                } else null
-                            }
-                        }.awaitAll().filterNotNull()
-                    }
-
-                    NetworkResult.Success(listaPokemons)
-                } catch (e: Exception) {
-
-
-
-
-
-//    suspend fun fetchAllPokemons(): NetworkResult<List<Pokemon>> = withContext(dispatcher) {
-//        when (val listResult = safeApiCall {
-//            pokemonService.getPokemonList(limit = 20, offset = 0)
-//        }) {
-//            is NetworkResult.Success -> {
-//                val enlaces = listResult.data?.pokemonEnlaces.orEmpty()
-//                if (enlaces.isEmpty()) {
-//                    return@withContext NetworkResult.Error(ConstantesErrores.LLAMADA_VACIA)
-//                }
-//                val results = enlaces.map { enlace ->
-//                    async {
-//                        when (val response = safeApiCall {
-//                            pokemonService.getPokemonByUrl(enlace.url)
-//                        }) {
-//                            is NetworkResult.Success -> response.data?.let {
-//                                PokemonMapper.pokemonDatabaseToPokemon(it)
-//                            }
-//
-//                            else -> null
-//                        }
-//                    }
-//                }.awaitAll().filterNotNull()
-//                return@withContext NetworkResult.Success(results)
-//            }
-//
-//            is NetworkResult.Error -> NetworkResult.Error(message = listResult.message, data = null)
-//            else -> NetworkResult.Error(message = ConstantesErrores.ERROR_DESCONOCIDO, data = null)
-//        }
-//    }
-
 
 }

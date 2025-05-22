@@ -6,6 +6,6 @@ import com.example.retrofitpokemon.data.remote.model.enlacespokemons.PokemonEnla
 //todo igual no es necesario
 object PokemonEnlaceMapper {
     fun responseToEnlaces(pokemonEnlaceResponse: PokemonEnlaceResponse): List<PokemonEnlace>{
-        return pokemonEnlaceResponse.pokemonEnlaces
+        return pokemonEnlaceResponse.results
     }
 }

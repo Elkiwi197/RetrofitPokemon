@@ -35,10 +35,12 @@ class FragmentListaPokemonViewModel @Inject constructor(
                     isLoading = false,
                     listaPokemons = result.data!!
                 )
+
                 is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(
                     isLoading = false,
-                    uiEvent = UiEvent.ShowSnackbar(result.message ?: ConstantesErrores.ERROR_DESCONOCIDO)
+                    uiEvent = UiEvent.ShowSnackbar(message = result.message!!)
                 )
+
                 is NetworkResult.Loading -> _uiState.value = _uiState.value?.copy(isLoading = true)
             }
         }
