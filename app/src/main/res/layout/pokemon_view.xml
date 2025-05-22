@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <TextView
-            android:id="@+id/labelFoto"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/fotoPokemon"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -27,13 +27,13 @@
             android:text="@string/nombre"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/textViewTipo"
+            app:layout_constraintBottom_toTopOf="@id/textViewTipos"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/labelFoto"
+            app:layout_constraintStart_toEndOf="@id/fotoPokemon"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textViewTipo"
+            android:id="@+id/textViewTipos"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"

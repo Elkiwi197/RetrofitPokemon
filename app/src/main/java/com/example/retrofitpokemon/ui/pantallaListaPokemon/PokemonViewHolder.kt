@@ -2,6 +2,7 @@ package com.example.retrofitpokemon.ui.pantallaListaPokemon
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.retrofitpokemon.databinding.PokemonViewBinding
 import com.example.retrofitpokemon.domain.model.Pokemon
 
@@ -16,8 +17,8 @@ class PokemonViewHolder(
     fun bind(pokemon: Pokemon) {
         with(binding) {
             textViewNombre.text = pokemon.nombre
-            textViewTipo.text = pokemon.tipos.toString()
-
+            textViewTipos.text = pokemon.tipos.toString()
+            fotoPokemon.load(pokemon.urlFoto)
             itemView.setOnLongClickListener {
                 true
             }

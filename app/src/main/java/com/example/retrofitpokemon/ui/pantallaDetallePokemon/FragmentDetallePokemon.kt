@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.retrofitpokemon.databinding.FragmentDetallePokemonBinding
+import com.example.retrofitpokemon.ui.pantallaListaPokemon.FragmentListaPokemon
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,6 +18,7 @@ class FragmentDetallePokemon : Fragment(){
     private var _binding: FragmentDetallePokemonBinding? = null
     private val binding get() = _binding!!
     private val viewModel: DetalleViewModel by viewModels()
+    private val args: FragmentDetallePokemonArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,15 +30,12 @@ class FragmentDetallePokemon : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         observarState()
-        eventos()
-
-        getPokemonById()
+        getPokemonById(args.idPokemon)
     }
 
-    private fun getPokemonById() {
-        viewModel.handleEvent(DetalleContract.PokemonEvent.LoadPokemonById(4))
+    private fun getPokemonById(id: Int) {
+        viewModel.handleEvent(DetalleContract.PokemonEvent.LoadPokemonById(id))
     }
 
     private fun observarState() {
@@ -49,14 +49,6 @@ class FragmentDetallePokemon : Fragment(){
         }
     }
 
-
-
-    private fun eventos() {
-//        binding.botonNavegarDetalle.setOnClickListener {
-//            val action = FragmentListadoDirections.actionFragmentListadoToFragmentAnadir()
-//            findNavController().navigate(action)
-//        }
-    }
 
     override fun onDestroy() {
         super.onDestroy()

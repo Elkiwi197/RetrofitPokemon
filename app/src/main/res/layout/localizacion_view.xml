@@ -12,7 +12,7 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/labelFoto"
+            android:id="@+id/fotoPokemon"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,7 +29,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/labelFoto"
+            app:layout_constraintStart_toEndOf="@id/fotoPokemon"
             app:layout_constraintTop_toTopOf="parent" />
 
 

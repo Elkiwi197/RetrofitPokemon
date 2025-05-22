@@ -25,12 +25,16 @@ class PokemonRepository @Inject constructor(
         NetworkResult.Error("Api call failed $errorMessage")
 
 
-    //    suspend fun getAllPokemons(): NetworkResult<List<Pokemon>> {
-//        return pokemonDataSource.fetchAllPokemons()
+    suspend fun getAllPokemons(): NetworkResult<List<Pokemon>> {
+        return when (val result = pokemonDataSource.fetchAllPokemons()) {
+            is NetworkResult.Success -> NetworkResult.Success(data = result.data!!)
+            is NetworkResult.Error -> NetworkResult.Error(message = result.message)
+            is NetworkResult.Loading -> NetworkResult.Loading()
+        }
 
 
 //    }
-    // try {
+// try {
 //            val response = pokemonService.getPokemon(id)
 //            if (response.isSuccessful) {
 //                val body = response.body()
@@ -47,5 +51,6 @@ class PokemonRepository @Inject constructor(
 //        }
 
 
+    }
 }
 

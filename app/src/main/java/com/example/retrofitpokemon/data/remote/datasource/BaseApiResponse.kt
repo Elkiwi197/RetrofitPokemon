@@ -22,6 +22,7 @@ abstract class BaseApiResponse {
     }
 
 
+
     suspend fun <T> safeApiCallNoBody(apiCall: suspend () -> Response<T>): NetworkResult<Boolean> {
         try {
             val response = apiCall()

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/fragmentDetallePokemon">
+    app:startDestination="@id/fragmentListaPokemon">
     <fragment
         android:id="@+id/fragmentListaPokemon"
         android:name="com.example.retrofitpokemon.ui.pantallaListaPokemon.FragmentListaPokemon"
@@ -22,7 +22,11 @@
         android:id="@+id/fragmentDetallePokemon"
         android:name="com.example.retrofitpokemon.ui.pantallaDetallePokemon.FragmentDetallePokemon"
         android:label="fragment_detalle_pokemon"
-        tools:layout="@layout/fragment_detalle_pokemon" />
+        tools:layout="@layout/fragment_detalle_pokemon">
+        <argument
+            android:name="idPokemon"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentListaTipos"
         android:name="com.example.retrofitpokemon.ui.pantallaListaTipos.FragmentListaTipos"
