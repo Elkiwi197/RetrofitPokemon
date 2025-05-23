@@ -9,8 +9,7 @@ import com.example.retrofitpokemon.domain.model.Pokemon
 class PokemonViewHolder(
     itemView: View,
     val actions: PokemonAdapter.PokemonActions
-) :
-    RecyclerView.ViewHolder(itemView) {
+) : RecyclerView.ViewHolder(itemView) {
 
     private val binding = PokemonViewBinding.bind(itemView)
 

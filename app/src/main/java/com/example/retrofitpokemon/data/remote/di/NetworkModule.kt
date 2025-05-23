@@ -2,6 +2,7 @@ package com.example.retrofitpokemon.data.remote.di
 
 import com.example.retrofitpokemon.BuildConfig
 import com.example.retrofitpokemon.data.remote.apiservices.PokemonService
+import com.example.retrofitpokemon.data.remote.apiservices.TiposService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,5 +44,10 @@ object NetworkModule {
     @Provides
     fun providesPokemonService(retrofit: Retrofit): PokemonService {
         return retrofit.create(PokemonService::class.java)
+    }
+
+    @Provides
+    fun providesTiposService(retrofit: Retrofit): TiposService {
+        return retrofit.create(TiposService::class.java)
     }
 }

@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retrofitpokemon.common.ConstantesErrores
 import com.example.retrofitpokemon.data.remote.NetworkResult
-import com.example.retrofitpokemon.data.remote.mappers.PokemonMapper
-import com.example.retrofitpokemon.domain.model.Pokemon
 import com.example.retrofitpokemon.domain.usecases.GetPokemonByIdUseCase
 import com.example.retrofitpokemon.ui.common.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -38,14 +36,12 @@ class DetalleViewModel @Inject constructor(
                     isLoading = false,
                     pokemon = result.data
                 )
-
                 is NetworkResult.Error -> _uiState.value = _uiState.value?.copy(
                     isLoading = false,
                     uiEvent = UiEvent.ShowSnackbar(
                         result.message ?: ConstantesErrores.ERROR_DESCONOCIDO
                     )
                 )
-
                 is NetworkResult.Loading -> _uiState.value =
                     _uiState.value?.copy(isLoading = true)
             }

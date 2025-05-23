@@ -48,6 +48,11 @@ class FragmentDetallePokemon : Fragment() {
                     binding.textViewHabilidades.text = state.pokemon.habilidades.toString()
                     binding.fotoDetallePokemon.load(state.pokemon.urlFoto)
                 }
+                if (state.isLoading) {
+                    binding.progressBar.visibility = (View.VISIBLE)
+                } else {
+                    binding.progressBar.visibility = (View.GONE)
+                }
                 state.uiEvent?.let {
                     when (state.uiEvent) {
                         is UiEvent.ShowSnackbar -> Toast.makeText(
@@ -55,7 +60,6 @@ class FragmentDetallePokemon : Fragment() {
                             state.uiEvent.message,
                             Toast.LENGTH_SHORT
                         ).show()
-
                     }
                 }
             }

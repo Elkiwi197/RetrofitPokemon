@@ -1,15 +1,11 @@
 package com.example.retrofitpokemon.data.repositories
 
 import com.example.retrofitpokemon.data.remote.NetworkResult
-import com.example.retrofitpokemon.data.remote.apiservices.PokemonService
 import com.example.retrofitpokemon.data.remote.datasource.PokemonDataSource
-import com.example.retrofitpokemon.data.remote.mappers.PokemonMapper
-import com.example.retrofitpokemon.data.remote.model.pokemondatabase.PokemonDatabase
 import com.example.retrofitpokemon.domain.model.Pokemon
 import javax.inject.Inject
 
 class PokemonRepository @Inject constructor(
-    private val pokemonService: PokemonService, //todo preguntar a Oscar por que llama al service y al datasource desde la misma clase
     private val pokemonDataSource: PokemonDataSource,
 ) {
     suspend fun getPokemonById(id: Int): NetworkResult<Pokemon> {
