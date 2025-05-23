@@ -9,12 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrofitpokemon.databinding.FragmentListaTiposBinding
-import com.example.retrofitpokemon.domain.model.Tipo
 import com.example.retrofitpokemon.ui.common.UiEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentListaTipos  : Fragment() {
+class FragmentListaTipos : Fragment() {
     private var _binding: FragmentListaTiposBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: TipoAdapter
@@ -50,27 +49,16 @@ class FragmentListaTipos  : Fragment() {
                         ).show()
                     }
                 }
-                if(state.isLoading){
-                    binding.progressBar.visibility = View.VISIBLE
+                if (state.isLoading) {
+                    binding.progressBarTipos.visibility = View.VISIBLE
                 } else {
-                    binding.progressBar.visibility = View.GONE
+                    binding.progressBarTipos.visibility = View.GONE
                 }
             }
         }
     }
 
     private fun configureRecyclerView() {
-//        adapter = PokemonAdapter(
-////            actions = object : PokemonAdapter.PokemonActions {
-////                override fun onItemClick(pokemon: Pokemon) {
-////                    val action =
-////                        FragmentListaPokemonDirections.actionFragmentListaPokemonToFragmentDetallePokemon(
-////                            pokemon.id
-////                        )
-////                    findNavController().navigate(action)
-////                }
-////            }
-//        )
         adapter = TipoAdapter()
         binding.listaTipos.layoutManager = LinearLayoutManager(requireContext())
         binding.listaTipos.adapter = adapter

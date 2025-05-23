@@ -13,7 +13,7 @@ class TipoAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListaTiposViewHolder {
         return ListaTiposViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.pokemon_view, parent, false)
+                .inflate(R.layout.tipo_view, parent, false)
         )
     }
 

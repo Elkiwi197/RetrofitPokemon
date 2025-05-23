@@ -47,7 +47,7 @@ class TipoDataSource @Inject constructor(
 
                             }
 
-                            else -> null
+                            else -> return NetworkResult.Error(message = ConstantesErrores.TIPO_VACIO)
                         }
                     } else null
                 }
